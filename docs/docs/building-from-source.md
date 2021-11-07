@@ -19,6 +19,57 @@ docker run --rm -v $PWD/xemu:/xemu -w /xemu \
 ./xemu/dist/xemu.exe
 ```
 
+### Debugging with Visual Studio
+
+1. Install [MSYS2](https://www.msys2.org/)
+1. Build xemu as above.
+1. Open the xemu directory in Visual Studio as a "local folder"
+1. In Solution Explorer, make sure the "Show All Files" option is enabled and right click on `xemu.exe` inside of the `dist` directory.
+1. Select "Add debug configuration"
+1. From the dialog, select `Launch for MinGW/Cygwin (gdb)`. An editor for `lauch.vs.json` should appear.
+1. Add a target configuration. For example:
+    ```
+    "configurations": [
+      {
+        "type": "cppdbg",
+        "name": "xemu.exe - test.iso",
+        "project": "dist\\xemu.exe",
+        "projectTarget": "",
+        "cwd": "${workspaceRoot}",
+        "program": "${debugInfo.target}",
+        "args": [
+          "-s",
+          "-dvd_path",
+          "X:\\xiso\\test.iso"
+        ],
+        "MIMode": "gdb",
+        "miDebuggerPath": "${env.MINGW_PREFIX}\\bin\\gdb.exe",
+        "externalConsole": true
+      }
+    ]
+
+    ```
+1. If you have not previously configured the MINGW_PREFIX environment, go to `Project` -> `Edit Settings` -> `CppProperties.json`
+  1. In the resulting editor, add an `environments` configuration. For example:
+      ```
+      "environments": [
+        {
+          "MINGW_PREFIX": "C:/msys64/mingw64",
+          "MINGW_CHOST ": "x86_64-w64-mingw32",
+          "MINGW_PACKAGE_PREFIX": "mingw-w64-x86_64",
+          "MSYSTEM": "MINGW64",
+          "MSYSTEM_CARCH": "x64_64",
+          "MSYSTEM_PREFIX": "${env.MINGW_PREFIX}",
+          "SHELL": "${env.MINGW_PREFIX}/../usr/bin/bash",
+          "TEMP": "${env.MINGW_PREFIX}/../tmp",
+          "TMP": "${env.TEMP}",
+          "PATH": "${env.MINGW_PREFIX}/bin;${env.MINGW_PREFIX}/../usr/local/bin;${env.MINGW_PREFIX}/../usr/bin;${env.PATH}",
+          "INCLUDE": "project/lib/include;${env.MINGW_PREFIX}/mingw/include"
+        }
+      ]  
+      ```
+
+
 ## macOS
 
 First install the [Homebrew package manager](https://brew.sh/).
