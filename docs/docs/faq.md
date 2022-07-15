@@ -16,7 +16,7 @@ Your MCPX and BIOS dump should be for a 1.0 Xbox. It's suggested that your MCPX 
 A default one will be created if you do not provide one.
 
 #### Q: Why am I getting `The guest has not initialized the display`
-This is likely due to a mismatch of MCPX and BIOS images, or a corrupt MCPX boot ROM.
+This is likely due to a mismatch of MCPX and BIOS images, or a corrupt MCPX boot ROM. It may also be due to an incorrect AV Pack setting, check the Machine > System menu and verify that the selection is not "None".
 
 #### Q: Why am I getting `Please insert an Xbox disc...`? I already loaded an ISO.
 Try restarting xemu. If you continue to get the message, your ISO may not be dumped in a compatible way. Try using [extract-xiso](https://github.com/xboxdev/extract-xiso) to pack your ISO.
