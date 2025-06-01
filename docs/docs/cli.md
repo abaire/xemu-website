@@ -12,3 +12,8 @@ startup behavior.
 
 Extra command line arguments are passed as QEMU launch arguments. See [QEMU
 documentation](https://www.qemu.org/documentation/) for specifics.
+
+A number of the config options may be specified via QEMU arguments. For example,
+the startup animation may be skipped by passing
+`-machine xbox,short-animation=on`. You may use `-machine help` to find similar
+options.
