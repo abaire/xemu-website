@@ -26,6 +26,7 @@ docker run --rm -v $PWD/xemu:/xemu -w /xemu \
 `ls -d xemu` does not print "xemu" you will need to change directories.
 
 * When building on Windows via WSL2, doing the `git clone` from inside WSL2 may substantially increase the build speed.
+* You may use [cv2pdb](https://github.com/rainers/cv2pdb/releases) to extract debug symbols from the generated executable into the pdb format expected by many Windows tools.
 
 ## macOS
 
